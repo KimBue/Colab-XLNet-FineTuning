@@ -342,12 +342,13 @@ class StackoverflowProcessor(DataProcessor):
 class StackoverflowBodyProcessor(StackoverflowProcessor):
     def _select_examples(self, data_dir, mode):
         # This code should be optimized
+        absolute_path = os.path.dirname(os.path.abspath(__file__))
         if mode == "train":
-            X = pickle.load(open(data_dir + "X_Body_train.pickle"), "rb")
-            Y = pickle.load(open(data_dir + "y_train.pickle"), "rb")
+            X = pickle.load(open(absolute_path +data_dir + "X_Body_train.pickle"), "rb")
+            Y = pickle.load(open(absolute_path +data_dir + "y_train.pickle"), "rb")
         elif mode == "test":
-            X = pickle.load(open(data_dir + "X_Body_test.pickle"), "rb")
-            Y = pickle.load(open(data_dir + "y_test.pickle"), "rb")
+            X = pickle.load(open(absolute_path +data_dir + "X_Body_test.pickle"), "rb")
+            Y = pickle.load(open(absolute_path + data_dir + "y_test.pickle"), "rb")
         else:
             raise ValueError('mode should be train or test')
         return self.create_examples(X, Y)
