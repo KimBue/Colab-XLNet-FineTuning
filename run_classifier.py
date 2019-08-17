@@ -15,6 +15,8 @@ import json
 import random
 from copy import copy
 from collections import defaultdict as dd
+import pickle
+import pandas
 
 import absl.logging as _logging  # pylint: disable=unused-import
 import tensorflow as tf
@@ -319,6 +321,37 @@ class ImdbProcessor(DataProcessor):
         examples.append(InputExample(
             guid="unused_id", text_a=text, text_b=None, label=label))
     return examples
+
+class StackoverflowProcessor(DataProcessor):
+
+    def get_train_examples(self, data_dir):
+        return self._select_examples(data_dir, "train")
+    def get_dev_examples(self, data_dir):
+        return self._select_examples(data_dir, "test")
+    def create_examples(self, X, Y):
+        examples = []
+        for text, label in zip(X, Y):
+
+            examples.append(InputExample(
+                guid="unused_id", text_a=text, text_b=None, label=label))
+        return examples
+    def _select_examples(self, data_dir, mode):
+        raise NotImplementedError()
+class StackoverflowBodyProcessor(StackoverflowProcessor):
+    def _select_examples(self, data_dir, mode):
+        # This code should be optimized
+        if mode == "train":
+            X = pickle.load(os.path.join(data_dir, "X_Body_train.pickle"), "rb")
+            Y = pickle.load(os.path.join(data_dir, "y_train.pickle"), "rb")
+        elif mode == "test":
+            X = pickle.load(os.path.join(data_dir, "X_Body_test.pickle"), "rb")
+            Y = pickle.load(os.path.join(data_dir, "y_test.pickle"), "rb")
+        else:
+            raise ValueError('mode should be train or test')
+        return self.create_examples(X, Y)
+
+
+
 
 
 class MnliMatchedProcessor(GLUEProcessor):
@@ -651,7 +684,8 @@ def main(_):
       "mnli_mismatched": MnliMismatchedProcessor,
       'sts-b': StsbProcessor,
       'imdb': ImdbProcessor,
-       "yelp5": Yelp5Processor
+       "yelp5": Yelp5Processor,
+      "stackoverflowBody": StackoverflowBodyProcessor
   }
 
   if not FLAGS.do_train and not FLAGS.do_eval and not FLAGS.do_predict:
