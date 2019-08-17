@@ -685,7 +685,7 @@ def main(_):
       'sts-b': StsbProcessor,
       'imdb': ImdbProcessor,
        "yelp5": Yelp5Processor,
-      "stackoverflowBody": StackoverflowBodyProcessor
+      "stackoverflowbody": StackoverflowBodyProcessor
   }
 
   if not FLAGS.do_train and not FLAGS.do_eval and not FLAGS.do_predict:
