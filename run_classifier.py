@@ -352,6 +352,19 @@ class StackoverflowBodyProcessor(StackoverflowProcessor):
         else:
             raise ValueError('mode should be train or test')
         return self.create_examples(X, Y)
+class StackoverflowTitleProcessor(StackoverflowProcessor):
+    def _select_examples(self, data_dir, mode):
+        # This code should be optimized
+        absolute_path = os.path.dirname(os.path.abspath(__file__))
+        if mode == "train":
+            X = pickle.load(open("X_Title_train.pickle", "rb"))
+            Y = pickle.load(open("y_train.pickle", "rb"))
+        elif mode == "test":
+            X = pickle.load(open("X_Title_test.pickle","rb"))
+            Y = pickle.load(open("y_test.pickle","rb"))
+        else:
+            raise ValueError('mode should be train or test')
+        return self.create_examples(X, Y)
 
 
 
@@ -688,7 +701,8 @@ def main(_):
       'sts-b': StsbProcessor,
       'imdb': ImdbProcessor,
        "yelp5": Yelp5Processor,
-      "stackoverflowbody": StackoverflowBodyProcessor
+      "stackoverflowbody": StackoverflowBodyProcessor,
+      "stackoverflowtitle": StackoverflowTitleProcessor
   }
 
   if not FLAGS.do_train and not FLAGS.do_eval and not FLAGS.do_predict:
