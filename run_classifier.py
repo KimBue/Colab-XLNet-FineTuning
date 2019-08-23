@@ -333,7 +333,7 @@ class StackoverflowProcessor(DataProcessor):
         for text, label in zip(X, Y):
 
             examples.append(InputExample(
-                guid="unused_id", text_a=text, text_b=None, label=label))
+                guid="unused_id", text_a=text, text_b=None, label=label.tolist()))
         return examples
     def _select_examples(self, data_dir, mode):
         raise NotImplementedError()
