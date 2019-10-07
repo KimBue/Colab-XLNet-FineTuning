@@ -338,7 +338,7 @@ class StackoverflowProcessor(DataProcessor):
     def _select_examples(self, data_dir, mode):
         raise NotImplementedError()
     def get_labels(self):
-        return [str(x) for n in range(100)]
+        return [str(n) for n in range(100)]
 class StackoverflowBodyProcessor(StackoverflowProcessor):
     def _select_examples(self, data_dir, mode):
         # This code should be optimized
