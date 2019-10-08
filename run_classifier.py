@@ -338,6 +338,7 @@ class StackoverflowProcessor(DataProcessor):
         for (i, row) in enumerate(X.values):
             examples.append(InputExample(guid=i, text_a=row, label=Y[j]))
             j+=1
+            raise NotImplementedError()
         return examples
     def _select_examples(self, data_dir, mode):
         raise NotImplementedError()
