@@ -129,9 +129,9 @@ def convert_single_example(ex_index, example, label_list, max_seq_length,
   #  label_id = label_map[example.label] #error because of mulilabel list
   #else:
   #  label_id = example.label
-  labels_ids = []
-  for label in example.labels:
-    labels_ids.append(int(label))
+  label_ids = []
+  for label in example.label:
+    label_ids.append(int(label))
 
   if ex_index < 5:
     tf.logging.info("*** Example ***")
