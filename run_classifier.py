@@ -338,7 +338,7 @@ class StackoverflowProcessor(DataProcessor):
         for (i, row) in enumerate(X.values):
             examples.append(InputExample(guid=i, text_a=row, label=Y[j]))
             j+=1
-            raise NotImplementedError()
+
         return examples
     def _select_examples(self, data_dir, mode):
         raise NotImplementedError()
@@ -349,8 +349,8 @@ class StackoverflowBodyProcessor(StackoverflowProcessor):
         # This code should be optimized
         absolute_path = os.path.dirname(os.path.abspath(__file__))
         if mode == "train":
-            X = pickle.load(open("X_Body_train.pickle", "rb"))
-            Y = pickle.load(open("y_train.pickle", "rb"))
+            X = pickle.load(open("X_Body_trainZ.pickle", "rb"))
+            Y = pickle.load(open("y_trainZ.pickle", "rb"))
         elif mode == "test":
             X = pickle.load(open("X_Body_test.pickle","rb"))
             Y = pickle.load(open("y_test.pickle","rb"))
