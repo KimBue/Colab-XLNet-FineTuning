@@ -125,10 +125,14 @@ def convert_single_example(ex_index, example, label_list, max_seq_length,
   assert len(input_mask) == max_seq_length
   assert len(segment_ids) == max_seq_length
 
-  if label_list is not None:
-    label_id = label_map[example.label]
-  else:
-    label_id = example.label
+ # if label_list is not None:
+  #  label_id = label_map[example.label] #error because of mulilabel list
+  #else:
+  #  label_id = example.label
+  labels_ids = []
+  for label in example.labels:
+    labels_ids.append(int(label))
+
   if ex_index < 5:
     tf.logging.info("*** Example ***")
     tf.logging.info("guid: %s" % (example.guid))
