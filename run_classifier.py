@@ -349,11 +349,11 @@ class StackoverflowBodyProcessor(StackoverflowProcessor):
         # This code should be optimized
         absolute_path = os.path.dirname(os.path.abspath(__file__))
         if mode == "train":
-            X = pickle.load(open("X_Body_trainZ.pickle", "rb"))
-            Y = pickle.load(open("y_trainZ.pickle", "rb"))
+            X = pickle.load(open("X_Body_train10000.pickle", "rb"))
+            Y = pickle.load(open("y_train10000.pickle", "rb"))
         elif mode == "test":
-            X = pickle.load(open("X_Body_test.pickle","rb"))
-            Y = pickle.load(open("y_test.pickle","rb"))
+            X = pickle.load(open("X_Body_test10000.pickle","rb"))
+            Y = pickle.load(open("y_test10000.pickle","rb"))
         else:
             raise ValueError('mode should be train or test')
         return self.create_examples(X, Y)
