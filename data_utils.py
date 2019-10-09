@@ -41,7 +41,17 @@ EOD_ID = special_symbols["<eod>"]
 
 
 def _int64_feature(values):
-  return tf.train.Feature(int64_list=tf.train.Int64List(value=values))
+  if type(values) == type(list()):
+    if type(values[0]) == type(list()):
+      list64 = tf.train.Int64List(value=values[0])
+    else:
+      list64 = tf.train.Int64List(value=values)
+  else:
+    list64 = tf.train.Int64List(value=list(values))
+
+    f = tf.train.Int64List(int64_list=list64)
+
+  return tf.train.Feature(int64_list=f)
 
 
 def _float_feature(values):
