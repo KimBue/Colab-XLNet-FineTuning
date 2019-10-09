@@ -485,7 +485,14 @@ def file_based_convert_examples_to_features(
       return f
 
     def create_float_feature(values):
-      f = tf.train.Feature(float_list=tf.train.FloatList(value=list(values)))
+      if type(values) == type(list()):
+        if type(values[0]) == type(list()):
+            float_list = tf.train.FloatList(value=values[0])
+        else:
+            float_list = tf.train.FloatList(value=values)
+      else:
+        float_list = tf.train.FloatList(value=list(values))
+      f = tf.train.Feature( float_list)
       return f
 
     features = collections.OrderedDict()
