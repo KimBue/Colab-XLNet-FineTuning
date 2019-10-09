@@ -149,7 +149,7 @@ def convert_single_example_alt(ex_index, example, label_list, max_seq_length,
   return feature
 
 def convert_single_example(ex_index, example, max_seq_length,
-                           tokenizer):
+                           tokenize_fn):
     """Converts a single `InputExample` into a single `InputFeatures`."""
 
     if isinstance(example, PaddingInputExample):
@@ -160,10 +160,10 @@ def convert_single_example(ex_index, example, max_seq_length,
             label_ids=0,
             is_real_example=False)
 
-    tokens_a = tokenizer.tokenize(example.text_a)
+    tokens_a = tokenize_fn(example.text_a)
     tokens_b = None
     if example.text_b:
-        tokens_b = tokenizer.tokenize(example.text_b)
+        tokens_b = tokenize_fn(example.text_b)
 
     if tokens_b:
         # Modifies `tokens_a` and `tokens_b` in place so that the total
