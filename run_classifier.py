@@ -492,7 +492,7 @@ def file_based_convert_examples_to_features(
             float_list = tf.train.FloatList(value=values)
       else:
         float_list = tf.train.FloatList(value=list(values))
-      f = tf.train.Feature( float_list)
+      f = tf.train.Feature( float_list=float_list)
       return f
 
     features = collections.OrderedDict()
