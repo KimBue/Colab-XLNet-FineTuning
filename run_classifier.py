@@ -473,7 +473,11 @@ def file_based_convert_examples_to_features(
                                      max_seq_length, tokenize_fn)
 
     def create_int_feature(values):
-      list64 = tf.train.Int64List(value=list(values))
+      if type(values)==type(list()):
+        list64 = tf.train.Int64List(value=values)
+      else:
+          list64 = tf.train.Int64List(value=list(values))
+
       f = tf.train.Feature(int64_list=list64)
       return f
 
