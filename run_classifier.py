@@ -469,7 +469,7 @@ def file_based_convert_examples_to_features(
       tf.logging.info("Writing example {} of {}".format(ex_index,
                                                         len(examples)))
 
-    feature = convert_single_example(ex_index, example, label_list,
+    feature = convert_single_example(ex_index, example,
                                      max_seq_length, tokenize_fn)
 
     def create_int_feature(values):
