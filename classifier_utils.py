@@ -58,7 +58,7 @@ def _truncate_seq_pair(tokens_a, tokens_b, max_length):
       tokens_b.pop()
 
 
-def convert_single_example_alt(ex_index, example, label_list, max_seq_length,
+def convert_single_example(ex_index, example, label_list, max_seq_length,
                               tokenize_fn):
   """Converts a single `InputExample` into a single `InputFeatures`."""
 
@@ -145,10 +145,10 @@ def convert_single_example_alt(ex_index, example, label_list, max_seq_length,
       input_ids=input_ids,
       input_mask=input_mask,
       segment_ids=segment_ids,
-      label_id=label_id)
+      label_id=label_ids)
   return feature
 
-def convert_single_example(ex_index, example, max_seq_length,
+def convert_single_example_neu(ex_index, example, max_seq_length,
                            tokenize_fn):
     """Converts a single `InputExample` into a single `InputFeatures`."""
 
