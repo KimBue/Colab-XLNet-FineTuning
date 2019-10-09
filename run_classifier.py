@@ -474,7 +474,10 @@ def file_based_convert_examples_to_features(
 
     def create_int_feature(values):
       if type(values)==type(list()):
-        list64 = tf.train.Int64List(value=values)
+        if type(values[0]) == type(list()):
+          list64 = tf.train.Int64List(value=values[0])
+        else:
+          list64 = tf.train.Int64List(value=values)
       else:
           list64 = tf.train.Int64List(value=list(values))
 
