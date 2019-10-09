@@ -139,7 +139,7 @@ def get_classification_loss(
   inp = tf.transpose(features["input_ids"], [1, 0])
   seg_id = tf.transpose(features["segment_ids"], [1, 0])
   inp_mask = tf.transpose(features["input_mask"], [1, 0])
-  label = tf.reshape(features["label_ids"], [bsz_per_core])
+  label = features["label_ids"]#tf.reshape(features["label_ids"], [bsz_per_core])
 
   xlnet_config = xlnet.XLNetConfig(json_path=FLAGS.model_config_path)
   run_config = xlnet.create_run_config(is_training, True, FLAGS)
