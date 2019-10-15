@@ -500,9 +500,11 @@ def file_based_convert_examples_to_features(
     features["input_mask"] = create_float_feature(feature.input_mask)
     features["segment_ids"] = create_int_feature(feature.segment_ids)
     if label_list is not None:
-      features["label_ids"] = create_int_feature([feature.label_id])
+        #add s to label_id
+      features["label_ids"] = create_int_feature([feature.label_ids])
     else:
-      features["label_ids"] = create_float_feature([float(feature.label_id)])
+        #add s to label_id
+      features["label_ids"] = create_float_feature([float(feature.label_ids)])
     features["is_real_example"] = create_int_feature(
         [int(feature.is_real_example)])
 
@@ -532,7 +534,7 @@ def file_based_input_fn_builder(input_file, seq_length, is_training,
     """Decodes a record to a TensorFlow example."""
     example = tf.parse_single_example(record, name_to_features)
 
-   
+
     # tf.Example only supports tf.int64, but the TPU only supports tf.int32.
     # So cast all int64 to int32.
     for name in list(example.keys()):
