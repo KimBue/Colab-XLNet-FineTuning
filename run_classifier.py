@@ -500,7 +500,7 @@ def file_based_convert_examples_to_features(
     features["input_mask"] = create_float_feature(feature.input_mask)
     features["segment_ids"] = create_int_feature(feature.segment_ids)
     if label_list is not None:
-       
+
       features["label_ids"] = create_int_feature([feature.label_id])
     else:
 
@@ -522,13 +522,14 @@ def file_based_input_fn_builder(input_file, seq_length, is_training,
       "input_ids": tf.FixedLenFeature([seq_length], tf.int64),
       "input_mask": tf.FixedLenFeature([seq_length], tf.float32),
       "segment_ids": tf.FixedLenFeature([seq_length], tf.int64),
-      "label_ids": tf.FixedLenFeature([100], tf.int64),
+      "label_ids": tf.FixedLenFeature([100], tf.int32),
       "is_real_example": tf.FixedLenFeature([], tf.int64),
   }
   if FLAGS.is_regression:
     name_to_features["label_ids"] = tf.FixedLenFeature([], tf.float32)
 
   tf.logging.info("Input tfrecord file {}".format(input_file))
+
 
   def _decode_record(record, name_to_features):
     """Decodes a record to a TensorFlow example."""
