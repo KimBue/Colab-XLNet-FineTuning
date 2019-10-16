@@ -328,7 +328,7 @@ class StackoverflowProcessor(DataProcessor):
         return self._select_examples(data_dir, "train")
     def get_dev_examples(self, data_dir):
         return self._select_examples(data_dir, "test")
-    def create_examples(self, X, Y):
+    def _create_examples(self, X, Y):
         examples = []
         #for text, label in zip(X, Y):
 
@@ -336,7 +336,7 @@ class StackoverflowProcessor(DataProcessor):
          #       guid="unused_id", text_a=text, text_b=None, label=label.tolist()))
         j = 0
         for (i, row) in enumerate(X.values):
-            examples.append(InputExample(guid=i, text_a=row, label=Y[j]))
+            examples.append(InputExample(guid=i, text_a=row, label=Y[j].tolist()))
             j+=1
 
         return examples
@@ -356,7 +356,7 @@ class StackoverflowBodyProcessor(StackoverflowProcessor):
             Y = pickle.load(open("y_test10000.pickle","rb"))
         else:
             raise ValueError('mode should be train or test')
-        return self.create_examples(X, Y)
+        return self._create_examples(X, Y)
 class StackoverflowTitleProcessor(StackoverflowProcessor):
     def _select_examples(self, data_dir, mode):
         # This code should be optimized
@@ -369,7 +369,7 @@ class StackoverflowTitleProcessor(StackoverflowProcessor):
             Y = pickle.load(open("y_test.pickle","rb"))
         else:
             raise ValueError('mode should be train or test')
-        return self.create_examples(X, Y)
+        return self._create_examples(X, Y)
 
 
 
