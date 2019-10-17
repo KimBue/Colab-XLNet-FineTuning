@@ -515,6 +515,7 @@ def file_based_convert_examples_to_features(
         if len(feature.label_ids) == 100:
             label_ids = feature.label_ids
         else:
+            print(len(feature.label_ids))
             if len(feature.label_ids[0])==100:
                 label_ids = feature.label_ids[0]
             else:
