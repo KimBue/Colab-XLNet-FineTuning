@@ -507,10 +507,10 @@ def file_based_convert_examples_to_features(
       features["label_ids"] = create_float_feature([float(feature.label_id)])
 
     #added
-    if isinstance(feature.label_ids, list):
-        label_ids = feature.label_ids
+    if isinstance(feature.label_id, list):
+        label_ids = feature.label_id
     else:
-        label_ids = feature.label_ids[0]
+        label_ids = feature.label_id[0]
     features["label_ids"] = create_int_feature(label_ids)
     #end added
 
