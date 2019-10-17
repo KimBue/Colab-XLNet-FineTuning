@@ -32,12 +32,12 @@ class InputFeatures(object):
                input_ids,
                input_mask,
                segment_ids,
-               label_id,
+               label_ids,
                is_real_example=True):
     self.input_ids = input_ids
     self.input_mask = input_mask
     self.segment_ids = segment_ids
-    self.label_id = label_id
+    self.label_ids = label_ids
     self.is_real_example = is_real_example
 
 
@@ -67,7 +67,7 @@ def convert_single_example(ex_index, example, label_list, max_seq_length,
         input_ids=[0] * max_seq_length,
         input_mask=[1] * max_seq_length,
         segment_ids=[0] * max_seq_length,
-        label_id=0,
+        label_ids=0,
         is_real_example=False)
 
   if label_list is not None:
@@ -145,7 +145,7 @@ def convert_single_example(ex_index, example, label_list, max_seq_length,
       input_ids=input_ids,
       input_mask=input_mask,
       segment_ids=segment_ids,
-      label_id=label_ids)
+      label_ids=label_ids)
   return feature
 
 def convert_single_example_neu(ex_index, example, max_seq_length,
