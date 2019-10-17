@@ -505,16 +505,16 @@ def file_based_convert_examples_to_features(
     features["segment_ids"] = create_int_feature(feature.segment_ids)
     if label_list is not None:
 
-      features["label_ids"] = create_int_feature(feature.label_id)
+      features["label_ids"] = create_int_feature(feature.label_ids)
     else:
       raise NotImplementedError
-      features["label_ids"] = create_float_feature([float(feature.label_id)])
+      features["label_ids"] = create_float_feature([float(feature.label_ids)])
 
     #added
-    if isinstance(feature.label_id, list):
-        label_ids = feature.label_id
+    if isinstance(feature.label_ids, list):
+        label_ids = feature.label_ids
     else:
-        label_ids = feature.label_id[0]
+        label_ids = feature.label_ids[0]
     features["label_ids"] = create_int_feature(label_ids)
     #end added
 
