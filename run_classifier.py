@@ -512,8 +512,15 @@ def file_based_convert_examples_to_features(
 
     #added
     if isinstance(feature.label_ids, list):
-        label_ids = feature.label_ids
+        if len(feature.label_ids) == 100:
+            label_ids = feature.label_ids
+        else:
+            if len(feature.label_ids[0])==100:
+                label_ids = feature.label_ids[0]
+            else:
+                raise ValueError
     else:
+        raise NotImplementedError
         label_ids = feature.label_ids[0]
     features["label_ids"] = create_int_feature(label_ids)
     #end added
