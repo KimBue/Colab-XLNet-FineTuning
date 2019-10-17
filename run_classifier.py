@@ -503,7 +503,7 @@ def file_based_convert_examples_to_features(
 
       features["label_ids"] = create_int_feature(feature.label_id)
     else:
-
+      raise NotImplementedError
       features["label_ids"] = create_float_feature([float(feature.label_id)])
     features["is_real_example"] = create_int_feature(
         [int(feature.is_real_example)])
