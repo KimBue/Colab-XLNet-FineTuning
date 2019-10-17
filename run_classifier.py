@@ -501,7 +501,7 @@ def file_based_convert_examples_to_features(
     features["segment_ids"] = create_int_feature(feature.segment_ids)
     if label_list is not None:
 
-      features["label_ids"] = create_int_feature([feature.label_id])
+      features["label_ids"] = create_int_feature(feature.label_id)
     else:
 
       features["label_ids"] = create_float_feature([float(feature.label_id)])
