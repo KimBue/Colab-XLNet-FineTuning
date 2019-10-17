@@ -512,7 +512,7 @@ def file_based_convert_examples_to_features(
 
     #added
     if isinstance(feature.label_ids, list):
-        if len(feature.label_ids) == 100:
+        if len(feature.label_ids) == 87:
             label_ids = feature.label_ids
         else:
             print(len(feature.label_ids))
@@ -543,7 +543,7 @@ def file_based_input_fn_builder(input_file, seq_length, is_training,
       "input_ids": tf.FixedLenFeature([seq_length], tf.int64),
       "input_mask": tf.FixedLenFeature([seq_length], tf.float32),
       "segment_ids": tf.FixedLenFeature([seq_length], tf.int64),
-      "label_ids": tf.FixedLenFeature([100], tf.int64),
+      "label_ids": tf.FixedLenFeature([87], tf.int64),
       "is_real_example": tf.FixedLenFeature([], tf.int64),
   }
   if FLAGS.is_regression:
