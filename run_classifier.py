@@ -343,7 +343,7 @@ class StackoverflowProcessor(DataProcessor):
     def _select_examples(self, data_dir, mode):
         raise NotImplementedError()
     def get_labels(self):
-        return [str(n) for n in range(87)]
+        return [str(n) for n in range(100)]
 class StackoverflowBodyProcessor(StackoverflowProcessor):
     def _select_examples(self, data_dir, mode):
         # This code should be optimized
@@ -512,7 +512,7 @@ def file_based_convert_examples_to_features(
 
     #added
     if isinstance(feature.label_ids, list):
-        if len(feature.label_ids) == 87:
+        if len(feature.label_ids) == 100:
             label_ids = feature.label_ids
         else:
             print(len(feature.label_ids))
@@ -543,7 +543,7 @@ def file_based_input_fn_builder(input_file, seq_length, is_training,
       "input_ids": tf.FixedLenFeature([seq_length], tf.int64),
       "input_mask": tf.FixedLenFeature([seq_length], tf.float32),
       "segment_ids": tf.FixedLenFeature([seq_length], tf.int64),
-      "label_ids": tf.FixedLenFeature([87], tf.int64),
+      "label_ids": tf.FixedLenFeature([100], tf.int64),
       "is_real_example": tf.FixedLenFeature([], tf.int64),
   }
   if FLAGS.is_regression:
