@@ -472,7 +472,7 @@ def file_based_convert_examples_to_features(
     feature = convert_single_example(ex_index, example, label_list,
                                      max_seq_length, tokenize_fn)
 
-    def create_int_feature_alt(values):
+    def create_int_feature(values):
       if type(values)==type(list()):
         if type(values[0]) == type(list()):
           list64 = tf.train.Int64List(value=values[0])
@@ -484,7 +484,7 @@ def file_based_convert_examples_to_features(
       f = tf.train.Feature(int64_list=list64)
       return f
 
-    def create_int_feature(values):
+    def create_int_feature_alt(values):
         f = tf.train.Feature(int64_list=tf.train.Int64List(value=list(values)))
         return f
 
