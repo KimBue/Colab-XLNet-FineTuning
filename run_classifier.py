@@ -603,6 +603,29 @@ def file_based_input_fn_builder(input_file, seq_length, is_training,
   return input_fn
 
 
+def avg_jacard(y_true, y_pred):
+    '''
+    see https://en.wikipedia.org/wiki/Multi-label_classification#Statistics_and_evaluation_metrics
+    '''
+    jacard = np.minimum(y_true, y_pred).sum(axis=1) / np.maximum(y_true, y_pred).sum(axis=1)
+
+    return jacard.mean()
+
+
+from sklearn.metrics import hamming_loss
+from sklearn.metrics import average_precision_score
+from sklearn.metrics import accuracy_score
+
+
+def print_score(y_pred, y_test):
+
+    print("Jacard score: {}".format(avg_jacard(y_test, y_pred)))
+    print("Hamming loss: {}".format(hamming_loss(y_pred, y_test)))
+    print("---")
+    print('Subset accuracy: {0}'.format(accuracy_score(y_test, y_pred, normalize=True, sample_weight=None)))
+    print('Macro Averaging: {0}'.format(average_precision_score(y_test, y_pred, average='macro')))
+    print('Micro Averaging: {0}'.format(average_precision_score(y_test, y_pred, average='micro')))
+    print("---")
 def get_model_fn(n_class):
   def model_fn(features, labels, mode, params):
     #### Training or Evaluation
@@ -636,8 +659,8 @@ def get_model_fn(n_class):
             'predictions': predictions,
             'weights': is_real_example
         }
-        accuracy = tf.metrics.accuracy(**eval_input_dict)
-
+        #accuracy = tf.metrics.accuracy(**eval_input_dict)
+        accuracy = avg_jacard(is_real_example, predictions)
         loss = tf.metrics.mean(values=per_example_loss, weights=is_real_example)
         return {
             'eval_accuracy': accuracy,
