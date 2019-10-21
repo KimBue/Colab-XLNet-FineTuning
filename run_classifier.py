@@ -629,7 +629,8 @@ def get_model_fn(n_class):
       assert FLAGS.num_hosts == 1
 
       def metric_fn(per_example_loss, label_ids, logits, is_real_example):
-        predictions = tf.argmax(logits, axis=-1, output_type=tf.int32)
+        #predictions = tf.argmax(logits, axis=-1, output_type=tf.int32)
+        predictions = tf.nn.sigmoid(logits)
         eval_input_dict = {
             'labels': label_ids,
             'predictions': predictions,
