@@ -607,11 +607,10 @@ def avg_jacard(y_true, y_pred):
     '''
     see https://en.wikipedia.org/wiki/Multi-label_classification#Statistics_and_evaluation_metrics
     '''
-    y_true = y_true.numpy()
-    y_pred = y_pred.numpy()
-    jacard = np.minimum(y_true, y_pred).sum(axis=1) / np.maximum(y_true, y_pred).sum(axis=1)
 
-    return jacard.mean()
+    jacard = tf.math.divide(tf.reduce_sum(tf.minimum(y_true, y_pred), axis = 1) ,tf.reduce_sum(tf.maximum(y_true, y_pred), axis = 1))
+
+    return tf.math.reduce_mean(jacard)
 
 
 from sklearn.metrics import hamming_loss
