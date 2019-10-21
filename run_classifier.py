@@ -935,7 +935,8 @@ def main(_):
             label_out = label_list[0]
         elif len(logits) > 2:
           max_index = np.argmax(np.array(logits, dtype=np.float32))
-          label_out = label_list[max_index]
+          #label_out = label_list[max_index]
+          label_out = logits
         else:
           raise NotImplementedError
 
