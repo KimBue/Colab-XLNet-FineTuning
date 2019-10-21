@@ -608,9 +608,9 @@ def avg_jacard(y_true, y_pred):
     see https://en.wikipedia.org/wiki/Multi-label_classification#Statistics_and_evaluation_metrics
     '''
 
-    print(y_true)
+    tf.logging.info(y_true)
     print()
-    print(y_pred)
+    tf.logging.info(y_pred)
     jacard = tf.math.divide(tf.reduce_sum(tf.minimum(y_true, y_pred), axis = 1) ,tf.reduce_sum(tf.maximum(y_true, y_pred), axis = 1))
 
     return tf.math.reduce_mean(jacard)
