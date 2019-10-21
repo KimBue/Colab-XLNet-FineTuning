@@ -664,7 +664,8 @@ def get_model_fn(n_class):
             'weights': is_real_example
         }
         #accuracy = tf.metrics.accuracy(**eval_input_dict)
-        accuracy = avg_jacard(label_ids, predictions)
+        pred = tf.dtypes.cast(tf.round(predictions), tf.int32)
+        accuracy = avg_jacard(label_ids, pred)
         loss = tf.metrics.mean(values=per_example_loss, weights=is_real_example)
         return {
             'eval_accuracy': accuracy,
