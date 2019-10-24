@@ -758,7 +758,7 @@ def classification_loss(hidden, labels, n_class, initializer, scope, reuse=None,
    # one_hot_target = tf.one_hot(labels, n_class, dtype=hidden.dtype)
    # loss = -tf.reduce_sum(tf.nn.log_softmax(logits) * one_hot_target, -1)
     probabilities = tf.nn.sigmoid(logits)
-    logits = tf.nn.sigmoid(logits)
+    #logits = tf.nn.sigmoid(logits)
     labels = tf.cast(labels, tf.float32)
     #tf.logging.info("num_labels:{};logits:{};labels:{}".format(num_labels, logits, labels))
     #per_example_loss = tf.nn.sigmoid_cross_entropy_with_logits(labels=labels, logits=logits)
