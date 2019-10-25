@@ -334,10 +334,10 @@ class StackoverflowProcessor(DataProcessor):
 
          #   examples.append(InputExample(
          #       guid="unused_id", text_a=text, text_b=None, label=label.tolist()))
-        j = 0
+
         for (i, row) in enumerate(X.values):
-            examples.append(InputExample(guid=i, text_a=row, label=Y[j].tolist()))
-            j+=1
+            examples.append(InputExample(guid=i, text_a=row, label=Y[i].tolist()))
+
 
         return examples
     def _select_examples(self, data_dir, mode):
