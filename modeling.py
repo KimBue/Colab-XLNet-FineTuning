@@ -763,7 +763,7 @@ def classification_loss(hidden, labels, n_class, initializer, scope, reuse=None,
     #tf.logging.info("num_labels:{};logits:{};labels:{}".format(num_labels, logits, labels))
     per_example_loss = tf.nn.sigmoid_cross_entropy_with_logits(labels=labels, logits=logits)
     #loss = tf.nn.sigmoid_cross_entropy_with_logits(labels=labels, logits=logits)
-    loss = tf.reduce_mean(per_example_loss)
+    loss = tf.reduce_sum(per_example_loss)
 
     if return_logits:
       return loss, logits
