@@ -352,8 +352,8 @@ class StackoverflowBodyProcessor(StackoverflowProcessor):
             X = pickle.load(open("X_Body_train.pickle", "rb"))
             Y = pickle.load(open("y_train.pickle", "rb"))
         elif mode == "test":
-            X = pickle.load(open("X_Body_test.pickle","rb"))
-            Y = pickle.load(open("y_test.pickle","rb"))
+            X = pickle.load(open("X_Body_test.pickle","rb"))[10000:]
+            Y = pickle.load(open("y_test.pickle","rb"))[10000:]
         else:
             raise ValueError('mode should be train or test')
         return self._create_examples(X, Y)
