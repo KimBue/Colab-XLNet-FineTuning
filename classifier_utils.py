@@ -67,7 +67,7 @@ def convert_single_example(ex_index, example, label_list, max_seq_length,
         input_ids=[0] * max_seq_length,
         input_mask=[1] * max_seq_length,
         segment_ids=[0] * max_seq_length,
-        label_ids=0,
+        label_ids=[n for n in range(100)],
         is_real_example=False)
 
   if label_list is not None:
