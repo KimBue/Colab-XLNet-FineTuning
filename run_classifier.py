@@ -946,7 +946,7 @@ def main(_):
 
       for pred_cnt, result in enumerate(estimator.predict(
           input_fn=pred_input_fn,
-          yield_single_examples=False,
+          yield_single_examples=True,
           checkpoint_path=FLAGS.predict_ckpt)):
         if pred_cnt % 1000 == 0:
           tf.logging.info("Predicting submission for example: {}".format(
